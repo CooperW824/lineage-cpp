@@ -239,7 +239,7 @@ lineage::vector lineage::vector::cross(const lineage::vector &other) const
 
     if (m_size == 2 && other.m_size == 2)
     {
-        lineage::vector result(3);
+        lineage::vector result(3, 0.0);
         result[2] = m_data[0] * other.m_data[1] - m_data[1] * other.m_data[0];
         return result;
     }
@@ -268,17 +268,42 @@ lineage::vector &lineage::vector::project(const lineage::vector &other)
 
 lineage::vector &lineage::vector::normalize()
 {
+    double mag = magnitude();
+    for(int i = 0; i < m_size; i++)
+    {
+        m_data[i] /= mag;
+    }
+    return *this;
 }
 
 lineage::vector lineage::vector::normalized() const
 {
+    double mag = magnitude();
+    lineage::vector result(m_size);
+    for(int i = 0; i < m_size; i++)
+    {
+        result[i] = m_data[i] / mag;
+    }
+    return result;
 }
 
 double lineage::vector::magnitude() const
 {
+    double sum = 0;
+    for(int i = 0; i < m_size; i++)
+    {
+        sum += m_data[i] * m_data[i];
+    }
+    return std::sqrt(sum);
 }
 
 double lineage::vector::magnitude_squared() const
 {
+    double sum = 0;
+    for(int i = 0; i < m_size; i++)
+    {
+        sum += m_data[i] * m_data[i];
+    }
+    return sum;
 }
 
