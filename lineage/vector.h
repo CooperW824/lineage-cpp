@@ -11,11 +11,11 @@ namespace lineage
         typedef std::function<double(size_t)> generator;
 
     private:
-        double* m_data;
-        size_t m_size;
+        std::unique_ptr<double[]> m_data = nullptr;
+        size_t m_size = 0;
 
     public:
-        vector();
+        vector(){};
         vector(size_t size);
         vector(const vector &other);
         vector(size_t size, double value);
@@ -24,7 +24,7 @@ namespace lineage
 
         friend void swap(lineage::vector &first, lineage::vector &second);
         vector &operator=(vector other);
-        ~vector();
+        ~vector(){};
 
         double &operator[](size_t index);
         const double &operator[](size_t index) const;
@@ -38,14 +38,14 @@ namespace lineage
         vector operator+(double value) const;
         vector operator-(double value) const;
         vector operator*(double factor) const;
-        vector operator/(double factor) const;
+        vector operator/(double divisor) const;
 
         vector &operator+=(const vector &other);
         vector &operator+=(double value);
         vector &operator-=(const vector &other);
         vector &operator-=(double value);
         vector &operator*=(double factor);
-        vector &operator/=(double factor);
+        vector &operator/=(double divisor);
 
         double dot(const vector &other) const;
         vector cross(const vector &other) const;

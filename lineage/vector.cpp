@@ -3,21 +3,16 @@
 #include <exception>
 #include <stdexcept>
 
-lineage::vector::vector()
-{
-    m_data = nullptr;
-    m_size = 0;
-}
 
 lineage::vector::vector(size_t size)
 {
-    m_data = new double[size];
+    m_data = std::make_unique<double[]>(size);
     m_size = size;
 }
 
 lineage::vector::vector(const vector &other)
 {   
-    m_data = new double[other.m_size];
+    m_data = std::make_unique<double[]>(other.m_size);
     for(int i = 0; i < other.m_size; i++)
     {
         m_data[i] = other.m_data[i];
@@ -26,7 +21,7 @@ lineage::vector::vector(const vector &other)
 
 lineage::vector::vector(size_t size, double value)
 {
-    m_data = new double[size];
+    m_data = std::make_unique<double[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -36,7 +31,7 @@ lineage::vector::vector(size_t size, double value)
 
 lineage::vector::vector(size_t size, double *data)
 {
-    m_data = new double[size];
+    m_data = std::make_unique<double[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -46,7 +41,7 @@ lineage::vector::vector(size_t size, double *data)
 
 lineage::vector::vector(size_t size, generator gen)
 {
-    m_data = new double[size];
+    m_data = std::make_unique<double[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -64,11 +59,6 @@ lineage::vector &lineage::vector::operator=(lineage::vector other)
 {
     swap(*this, other);
     return *this;
-}
-
-lineage::vector::~vector()
-{
-    delete[] m_data;
 }
 
 double &lineage::vector::operator[](size_t index)
@@ -101,7 +91,7 @@ const double &lineage::vector::at(size_t index) const
 
 double *lineage::vector::data()
 {
-    return m_data;
+    return m_data.get();
 }
 
 size_t lineage::vector::size() const
@@ -163,12 +153,12 @@ lineage::vector lineage::vector::operator*(double factor) const
     return result;
 }
 
-lineage::vector lineage::vector::operator/(double factor) const
+lineage::vector lineage::vector::operator/(double divisor) const
 {
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
     {
-        result[i] = m_data[i] / factor;
+        result[i] = m_data[i] / divisor;
     }
     return result;
 }
@@ -217,10 +207,10 @@ lineage::vector &lineage::vector::operator*=(double factor)
     return *this;
 }
 
-lineage::vector &lineage::vector::operator/=(double factor)
+lineage::vector &lineage::vector::operator/=(double divisor)
 {
     for(int i = 0; i < m_size; i++){
-        m_data[i] /= factor;
+        m_data[i] /= divisor;
     }
     return *this;
 }
