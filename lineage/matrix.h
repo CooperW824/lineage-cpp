@@ -14,9 +14,14 @@ namespace lineage
 	class matrix
 	{
 		typedef std::function<double(size_t, size_t)> per_item_generator;
-		typedef std::function<double(size_t)> vector_generator;
+		typedef std::function<vector(size_t)> vector_generator;
 
 	private:
+
+		/**
+		 * @brief The data of the matrix, stored as a 1D array of column vectors.
+		 * 
+		 */
 		std::unique_ptr<vector[]> m_data = nullptr;
 		size_t m_rows = 0;
 		size_t m_cols = 0;
@@ -50,6 +55,7 @@ namespace lineage
 
 		vector *data(){return m_data.get();};
 		size_t rows() const {return m_rows;};
+		size_t cols() const {return m_cols;};
 
 		matrix operator+(const matrix &other) const;
 		matrix operator-(const matrix &other) const;
@@ -57,6 +63,7 @@ namespace lineage
 		matrix operator-(double value) const;
 		matrix operator*(double factor) const;
 		matrix operator*(const matrix &other) const;
+		vector operator*(const lineage::vector &other) const;
 		matrix operator/(double divisor) const;
 
 		matrix &operator+=(const matrix &other);
@@ -65,7 +72,12 @@ namespace lineage
 		matrix &operator-=(double value);
 		matrix &operator*=(double factor);
 		matrix &operator*=(const matrix &other);
+		vector &operator*=(const lineage::vector &other) const;
 		matrix &operator/=(double divisor);
+
+		matrix &swap_rows(size_t row1, size_t row2);
+		matrix &multiply_row(size_t row, double factor);
+		matrix &add_rows(size_t row1, size_t row2, double factor);
 
 		matrix transposed() const;
 		matrix &transpose();
@@ -79,8 +91,6 @@ namespace lineage
 		matrix &invert();
 		matrix reduced() const;
 		matrix &reduce();
-		matrix augmented(const matrix &other) const;
-		matrix &augment(const matrix &other);
 
 		double determinant() const;
 		double trace() const;
