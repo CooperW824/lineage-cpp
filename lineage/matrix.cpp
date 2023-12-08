@@ -10,12 +10,12 @@ lineage::matrix::matrix(const lineage::matrix &other)
 
 }
 
-lineage::matrix::matrix(size_t rows, size_t cols, double value)
+lineage::matrix::matrix(size_t rows, size_t cols, complex_number value)
 {
 
 }
 
-lineage::matrix::matrix(size_t rows, size_t cols, double **data)
+lineage::matrix::matrix(size_t rows, size_t cols, complex_number **data)
 {
 
 }
@@ -89,12 +89,12 @@ lineage::vector &lineage::matrix::row_vector(size_t index)
 }
 
 
-const double &lineage::matrix::at(size_t row, size_t col) const
+const lineage::complex_number &lineage::matrix::at(size_t row, size_t col) const
 {
 
 }
 
-double &lineage::matrix::at(size_t row, size_t col)
+lineage::complex_number &lineage::matrix::at(size_t row, size_t col)
 {
 
 }
@@ -110,17 +110,17 @@ lineage::matrix lineage::matrix::operator-(const lineage::matrix &other) const
 
 }
 
-lineage::matrix lineage::matrix::operator+(double value) const
+lineage::matrix lineage::matrix::operator+(complex_number value) const
 {
 
 }
 
-lineage::matrix lineage::matrix::operator-(double value) const
+lineage::matrix lineage::matrix::operator-(complex_number value) const
 {
 
 }
 
-lineage::matrix lineage::matrix::operator*(double factor) const
+lineage::matrix lineage::matrix::operator*(complex_number factor) const
 {
 
 }
@@ -135,7 +135,7 @@ lineage::vector lineage::matrix::operator*(const lineage::vector &other) const
 
 }
 
-lineage::matrix lineage::matrix::operator/(double divisor) const
+lineage::matrix lineage::matrix::operator/(complex_number divisor) const
 {
 
 }
@@ -146,7 +146,7 @@ lineage::matrix &lineage::matrix::operator+=(const lineage::matrix &other)
 
 }
 
-lineage::matrix &lineage::matrix::operator+=(double value)
+lineage::matrix &lineage::matrix::operator+=(complex_number value)
 {
 
 }
@@ -156,12 +156,12 @@ lineage::matrix &lineage::matrix::operator-=(const lineage::matrix &other)
 
 }
 
-lineage::matrix &lineage::matrix::operator-=(double value)
+lineage::matrix &lineage::matrix::operator-=(complex_number value)
 {
 
 }
 
-lineage::matrix &lineage::matrix::operator*=(double factor)
+lineage::matrix &lineage::matrix::operator*=(complex_number factor)
 {
 
 }
@@ -176,7 +176,7 @@ lineage::vector &lineage::matrix::operator*=(const lineage::vector &other) const
 	// TODO: insert return statement here
 }
 
-lineage::matrix &lineage::matrix::operator/=(double divisor)
+lineage::matrix &lineage::matrix::operator/=(complex_number divisor)
 {
 
 }
@@ -187,12 +187,12 @@ lineage::matrix &lineage::matrix::swap_rows(size_t row1, size_t row2)
 
 }
 
-lineage::matrix &lineage::matrix::multiply_row(size_t row, double factor)
+lineage::matrix &lineage::matrix::multiply_row(size_t row, complex_number factor)
 {
 
 }
 
-lineage::matrix &lineage::matrix::add_rows(size_t row1, size_t row2, double factor)
+lineage::matrix &lineage::matrix::add_rows(size_t row1, size_t row2, complex_number factor)
 {
 
 }
@@ -259,12 +259,12 @@ lineage::matrix &lineage::matrix::reduce()
 }
 
 
-double lineage::matrix::determinant() const
+lineage::complex_number lineage::matrix::determinant() const
 {
 
 }
 
-double lineage::matrix::trace() const
+lineage::complex_number lineage::matrix::trace() const
 {
 
 }
@@ -360,7 +360,7 @@ lineage::matrix *lineage::matrix::diagonalize()
 
 }
 
-std::vector<double> lineage::matrix::eigenvalues() const
+std::vector<lineage::complex_number> lineage::matrix::eigenvalues() const
 {
 
 }
@@ -380,7 +380,7 @@ bool lineage::matrix::is_diagonalizable() const
 
 }
 
-bool lineage::matrix::is_eigenvalue(double value) const
+bool lineage::matrix::is_eigenvalue(complex_number value) const
 {
 
 }
