@@ -53,6 +53,9 @@ namespace lineage
 
 		complex_number conjugate() const;
 		complex_number &conjugated();
+
+		double magnitude() const;
+		double magnitude_squared() const;
 		
 	};
 }

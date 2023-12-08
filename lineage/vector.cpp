@@ -6,22 +6,22 @@
 
 lineage::vector::vector(size_t size)
 {
-    m_data = std::make_unique<double[]>(size);
+    m_data = std::make_unique<lineage::complex_number[]>(size);
     m_size = size;
 }
 
 lineage::vector::vector(const vector &other)
 {   
-    m_data = std::make_unique<double[]>(other.m_size);
+    m_data = std::make_unique<lineage::complex_number[]>(other.m_size);
     for(int i = 0; i < other.m_size; i++)
     {
         m_data[i] = other.m_data[i];
     }
 }
 
-lineage::vector::vector(size_t size, double value)
+lineage::vector::vector(size_t size, lineage::complex_number value)
 {
-    m_data = std::make_unique<double[]>(size);
+    m_data = std::make_unique<lineage::complex_number[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -29,9 +29,9 @@ lineage::vector::vector(size_t size, double value)
     }
 }
 
-lineage::vector::vector(size_t size, double *data)
+lineage::vector::vector(size_t size, lineage::complex_number *data)
 {
-    m_data = std::make_unique<double[]>(size);
+    m_data = std::make_unique<lineage::complex_number[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -41,7 +41,7 @@ lineage::vector::vector(size_t size, double *data)
 
 lineage::vector::vector(size_t size, generator gen)
 {
-    m_data = std::make_unique<double[]>(size);
+    m_data = std::make_unique<lineage::complex_number[]>(size);
     m_size = size;
     for(int i = 0; i < size; i++)
     {
@@ -61,35 +61,35 @@ lineage::vector &lineage::vector::operator=(lineage::vector other)
     return *this;
 }
 
-double &lineage::vector::operator[](size_t index)
+lineage::complex_number &lineage::vector::operator[](size_t index)
 {
     if(index >= m_size)
         throw std::out_of_range("Index out of range");
     return m_data[index];
 }
 
-const double &lineage::vector::operator[](size_t index) const
+const lineage::complex_number &lineage::vector::operator[](size_t index) const
 {
     if(index >= m_size)
         throw std::out_of_range("Index out of range");
     return m_data[index];
 }
 
-double &lineage::vector::at(size_t index)
+lineage::complex_number &lineage::vector::at(size_t index)
 {
     if(index >= m_size)
         throw std::out_of_range("Index out of range");
     return m_data[index];
 }
 
-const double &lineage::vector::at(size_t index) const
+const lineage::complex_number &lineage::vector::at(size_t index) const
 {
     if(index >= m_size)
         throw std::out_of_range("Index out of range");
     return m_data[index];
 }
 
-double *lineage::vector::data()
+lineage::complex_number *lineage::vector::data()
 {
     return m_data.get();
 }
@@ -123,7 +123,7 @@ lineage::vector lineage::vector::operator-(const lineage::vector &other) const
     return result;
 }
 
-lineage::vector lineage::vector::operator+(double value) const
+lineage::vector lineage::vector::operator+(lineage::complex_number value) const
 {
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
@@ -133,7 +133,7 @@ lineage::vector lineage::vector::operator+(double value) const
     return result;
 }
 
-lineage::vector lineage::vector::operator-(double value) const
+lineage::vector lineage::vector::operator-(lineage::complex_number value) const
 {
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
@@ -143,7 +143,7 @@ lineage::vector lineage::vector::operator-(double value) const
     return result;
 }
 
-lineage::vector lineage::vector::operator*(double factor) const
+lineage::vector lineage::vector::operator*(lineage::complex_number factor) const
 {
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
@@ -153,7 +153,7 @@ lineage::vector lineage::vector::operator*(double factor) const
     return result;
 }
 
-lineage::vector lineage::vector::operator/(double divisor) const
+lineage::vector lineage::vector::operator/(lineage::complex_number divisor) const
 {
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
@@ -173,7 +173,7 @@ lineage::vector &lineage::vector::operator+=(const lineage::vector &other)
     return *this;
 }
 
-lineage::vector &lineage::vector::operator+=(double value)
+lineage::vector &lineage::vector::operator+=(lineage::complex_number value)
 {
     for(int i = 0; i < m_size; i++){
         m_data[i] += value;
@@ -191,7 +191,7 @@ lineage::vector &lineage::vector::operator-=(const lineage::vector &other)
     return *this;
 }
 
-lineage::vector &lineage::vector::operator-=(double value)
+lineage::vector &lineage::vector::operator-=(lineage::complex_number value)
 {
     for(int i = 0; i < m_size; i++){
         m_data[i] -= value;
@@ -199,7 +199,7 @@ lineage::vector &lineage::vector::operator-=(double value)
     return *this;
 }
 
-lineage::vector &lineage::vector::operator*=(double factor)
+lineage::vector &lineage::vector::operator*=(lineage::complex_number factor)
 {
     for(int i = 0; i < m_size; i++){
         m_data[i] *= factor;
@@ -207,7 +207,7 @@ lineage::vector &lineage::vector::operator*=(double factor)
     return *this;
 }
 
-lineage::vector &lineage::vector::operator/=(double divisor)
+lineage::vector &lineage::vector::operator/=(lineage::complex_number divisor)
 {
     for(int i = 0; i < m_size; i++){
         m_data[i] /= divisor;
@@ -215,9 +215,9 @@ lineage::vector &lineage::vector::operator/=(double divisor)
     return *this;
 }
 
-double lineage::vector::dot(const lineage::vector &other) const
+lineage::complex_number lineage::vector::dot(const lineage::vector &other) const
 {
-    double product = 0;
+    lineage::complex_number product = 0;
     for(int i = 0; i < m_size; i++)
     {
         product += m_data[i] * other.m_data[i];
@@ -248,7 +248,7 @@ lineage::vector &lineage::vector::project(const lineage::vector &other)
 {
     if(m_size != other.m_size)
         throw std::invalid_argument("Vectors must be the same size");
-    double factor = dot(other) / other.magnitude_squared();
+    lineage::complex_number factor = dot(other) / other.magnitude_squared();
     for(int i = 0; i < m_size; i++)
     {
         m_data[i] = other.m_data[i] * factor;
@@ -258,7 +258,7 @@ lineage::vector &lineage::vector::project(const lineage::vector &other)
 
 lineage::vector &lineage::vector::normalize()
 {
-    double mag = magnitude();
+    lineage::complex_number mag = magnitude();
     for(int i = 0; i < m_size; i++)
     {
         m_data[i] /= mag;
@@ -268,7 +268,7 @@ lineage::vector &lineage::vector::normalize()
 
 lineage::vector lineage::vector::normalized() const
 {
-    double mag = magnitude();
+    lineage::complex_number mag = magnitude();
     lineage::vector result(m_size);
     for(int i = 0; i < m_size; i++)
     {
@@ -280,11 +280,11 @@ lineage::vector lineage::vector::normalized() const
 double lineage::vector::magnitude() const
 {
     double sum = 0;
-    for(int i = 0; i < m_size; i++)
+    for(size_t i = 0; i < m_size; i++)
     {
-        sum += m_data[i] * m_data[i];
+        sum += m_data[i].magnitude_squared();
     }
-    return std::sqrt(sum);
+    return sqrt(sum);
 }
 
 double lineage::vector::magnitude_squared() const
@@ -292,7 +292,7 @@ double lineage::vector::magnitude_squared() const
     double sum = 0;
     for(int i = 0; i < m_size; i++)
     {
-        sum += m_data[i] * m_data[i];
+        sum += m_data[i].magnitude_squared();
     }
     return sum;
 }

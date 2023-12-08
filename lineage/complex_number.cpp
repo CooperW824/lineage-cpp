@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cmath>
 
 #include "complex_number.h"
 
@@ -119,7 +120,7 @@ lineage::complex_number &lineage::complex_number::operator/=(double divisor)
     return *this;
 }
 
-lineage::complex_number &lineage::complex_number::operator-() 
+lineage::complex_number &lineage::complex_number::operator-()
 {
     this->real = -this->real;
     this->imaginary = -this->imaginary;
@@ -195,4 +196,14 @@ lineage::complex_number &lineage::complex_number::conjugated()
 {
     this->imaginary = -this->imaginary;
     return *this;
+}
+
+double lineage::complex_number::magnitude() const
+{
+    return std::sqrt(real * real + imaginary * imaginary);
+}
+
+double lineage::complex_number::magnitude_squared() const
+{
+    return real * real + imaginary * imaginary;
 }
