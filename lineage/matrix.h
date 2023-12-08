@@ -13,10 +13,9 @@ namespace lineage
 {
 	class matrix
 	{
-		typedef std::function<complex_number(size_t, size_t)> per_item_generator;
-		typedef std::function<vector(size_t)> vector_generator;
+		
 
-	private:
+	protected:
 		/**
 		 * @brief The data of the matrix, stored as a 1D array of column vectors.
 		 *
@@ -26,6 +25,9 @@ namespace lineage
 		size_t m_cols = 0;
 
 	public:
+		using per_item_generator = std::function<complex_number(size_t, size_t)>;
+		using vector_generator = std::function<lineage::vector(size_t)>;
+		
 		matrix::matrix(){};
 		matrix::matrix(size_t rows, size_t cols);
 		matrix::matrix(const lineage::matrix &other);

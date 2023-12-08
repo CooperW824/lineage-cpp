@@ -10,13 +10,14 @@ namespace lineage
 {
     class vector
     {
-        typedef std::function<complex_number(size_t)> generator;
+        
 
     private:
         std::unique_ptr<complex_number[]> m_data = nullptr;
         size_t m_size = 0;
 
     public:
+        using generator = std::function<complex_number(size_t)>;
         vector(){};
         vector(size_t size);
         vector(const vector &other);
