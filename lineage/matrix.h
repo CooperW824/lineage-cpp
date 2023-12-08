@@ -8,7 +8,6 @@
 
 #include "vector.h"
 
-
 namespace lineage
 {
 	class matrix
@@ -17,10 +16,9 @@ namespace lineage
 		typedef std::function<vector(size_t)> vector_generator;
 
 	private:
-
 		/**
 		 * @brief The data of the matrix, stored as a 1D array of column vectors.
-		 * 
+		 *
 		 */
 		std::unique_ptr<vector[]> m_data = nullptr;
 		size_t m_rows = 0;
@@ -38,24 +36,24 @@ namespace lineage
 
 		friend void swap(lineage::matrix &first, lineage::matrix &second);
 		matrix &operator=(matrix other);
-		~matrix(){};
+		virtual ~matrix(){};
 
 		static matrix identity(size_t size);
 		static matrix zero(size_t rows, size_t cols);
 
 		const vector &operator[](size_t index) const;
 		vector &operator[](size_t index);
-		const vector& column_vector(size_t index) const;
-		vector& column_vector(size_t index);
-		const vector& row_vector(size_t index) const;
-		vector& row_vector(size_t index);
+		const vector &column_vector(size_t index) const;
+		vector &column_vector(size_t index);
+		const vector &row_vector(size_t index) const;
+		vector &row_vector(size_t index);
 
 		const double &at(size_t row, size_t col) const;
 		double &at(size_t row, size_t col);
 
-		vector *data(){return m_data.get();};
-		size_t rows() const {return m_rows;};
-		size_t cols() const {return m_cols;};
+		vector *data() { return m_data.get(); };
+		size_t rows() const { return m_rows; };
+		size_t cols() const { return m_cols; };
 
 		matrix operator+(const matrix &other) const;
 		matrix operator-(const matrix &other) const;
@@ -116,9 +114,12 @@ namespace lineage
 
 		// TODO: Diagonalization, Eigenvalues, Eigenvectors, etc.
 		// I have to find a better algorithm for finding eigenvectors
-		matrix* diagonalize();
+		matrix *diagonalize();
 		std::vector<double> eigenvalues() const;
 		std::vector<lineage::vector> eigenvectors() const;
+		bool is_defective() const;
+		bool lineage::matrix::is_diagonalizable() const;
+		bool lineage::matrix::is_eigenvalue(double value) const;
 	};
 }
 

@@ -2,7 +2,7 @@
 
 lineage::matrix::matrix(size_t rows, size_t cols)
 {
-	
+
 }
 
 lineage::matrix::matrix(const lineage::matrix &other)
@@ -366,6 +366,21 @@ std::vector<double> lineage::matrix::eigenvalues() const
 }
 
 std::vector<lineage::vector> lineage::matrix::eigenvectors() const
+{
+
+}
+
+bool lineage::matrix::is_defective() const
+{
+
+}
+
+bool lineage::matrix::is_diagonalizable() const
+{
+
+}
+
+bool lineage::matrix::is_eigenvalue(double value) const
 {
 
 }
